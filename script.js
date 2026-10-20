@@ -19,6 +19,9 @@ let medicoes = [
 const nivelElemento =
     document.getElementById("nivelAtual");
 
+const mensagemConfirmacao =
+document.getElementById("mensagemConfirmacao");
+
 const situacaoElemento =
     document.getElementById("situacao");
 
@@ -344,6 +347,10 @@ function adicionarMedicao() {
 
     horarioAtualizacao.textContent =
         horario;
+
+    mensagemConfirmacao.textContent =
+    `Medição registrada com sucesso às ${horario}!`;
+    
 }
 
 
