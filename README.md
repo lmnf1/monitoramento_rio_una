@@ -60,3 +60,13 @@ Essa organização permite acompanhar a evolução do projeto e manter um histó
 * **Isabel:** README e documentação.
 * **Vinícius:** Git e versionamento.
 * **Isabella:** Organização e apresentação.
+
+## Versionamento
+
+O projeto utiliza Git e GitHub para controlar as alterações do código.
+As funcionalidades são desenvolvidas em branches separadas e integradas
+à branch principal após revisão por Pull Request.
+
+### Histórico de versões
+
+- v1.0.0 — Primeira versão estável do sistema de monitoramento do Rio Una.
