@@ -22,6 +22,12 @@ A solução apresenta informações como:
 
 Os dados utilizados podem ser **simulados**, não sendo necessária a utilização de sensores reais.
 
+## Objetivos
+
+### Objetivo geral
+
+Desenvolver um sistema de monitoramento preventivo simulado do Rio Una, em Palmares, para demonstrar como a tecnologia pode contribuir para o acompanhamento do nível da água.
+
 ## Como utilizar
 
 Para executar o projeto, é necessário ter um computador com acesso ao repositório e às ferramentas utilizadas no desenvolvimento.
