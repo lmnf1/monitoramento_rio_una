@@ -28,6 +28,15 @@ Os dados utilizados podem ser **simulados**, não sendo necessária a utilizaç�
 
 Desenvolver um sistema de monitoramento preventivo simulado do Rio Una, em Palmares, para demonstrar como a tecnologia pode contribuir para o acompanhamento do nível da água.
 
+### Objetivos específicos
+
+- Apresentar o nível atual do rio por meio de dados simulados;
+- Classificar a situação do rio como normal, atenção ou alerta;
+- Registrar e consultar o histórico das medições;
+- Disponibilizar uma área para avisos e informações;
+- Apresentar informações sobre os pontos de monitoramento;
+- Incentivar a conscientização sobre a prevenção de riscos ambientais.
+
 ## Como utilizar
 
 Para executar o projeto, é necessário ter um computador com acesso ao repositório e às ferramentas utilizadas no desenvolvimento.
