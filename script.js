@@ -159,6 +159,10 @@ function atualizarGrafico() {
 
     const nivelMinimo = Math.min(1.5, ...valores);
     const nivelMaximo = Math.max(3.5, ...valores);
+    document.querySelectorAll("#grafico .texto-eixo").forEach((rotulo, i) => {
+        const valor = nivelMaximo - i * (nivelMaximo - nivelMinimo) / 3;
+        rotulo.textContent = valor.toLocaleString("pt-BR", {maximumFractionDigits: 2}) + " m";
+    });
 
     let pontos = [];
 
@@ -408,11 +412,12 @@ botaoRegistrar.addEventListener("click", function() {
         !Number.isFinite(valor) ||
         valor < 0
     ) {
-        alert("Informe um nível válido.");
+        document.getElementById("mensagemConfirmacao").textContent = "Informe um nível válido, maior ou igual a zero.";
+        nivelManual.focus();
         return;
     }
 
-    nivelAtual = valor;
+    nivelAtual = Number(valor.toFixed(1));
 
     const horario = new Date().toLocaleTimeString(
         "pt-BR",
@@ -445,40 +450,44 @@ botaoRegistrar.addEventListener("click", function() {
     }
 
     nivelManual.value = "";
+    salvarMedicoes();
 });
 // ARMAZENAMENTO LOCAL DAS MEDIÇÕES
 
 function salvarMedicoes() {
-    localStorage.setItem(
-        "medicoesRioUna",
-        JSON.stringify(medicoes)
-    );
+    try {
+        localStorage.setItem("medicoesRioUna", JSON.stringify(medicoes));
+    } catch (erro) {
+        document.getElementById("mensagemConfirmacao").textContent = "Não foi possível salvar o histórico no navegador.";
+    }
 }
 
 function carregarMedicoes() {
-    const dados = localStorage.getItem("medicoesRioUna");
-
-    if (dados) {
-        medicoes = JSON.parse(dados);
-
-        if (medicoes.length > 0) {
-            const ultima = medicoes[medicoes.length - 1];
-
-            nivelAtual = ultima.nivel;
-            horarioAtualizacao.textContent = ultima.horario;
-        }
-
+    try {
+        const dados = JSON.parse(localStorage.getItem("medicoesRioUna"));
+        if (!Array.isArray(dados) || !dados.length || !dados.every(m => m && typeof m.horario === "string" && /^\d{2}:\d{2}$/.test(m.horario) && Number.isFinite(m.nivel) && m.nivel >= 0)) return;
+        medicoes = dados.slice(-6);
+        const ultima = medicoes[medicoes.length - 1];
+        nivelAtual = ultima.nivel;
+        horarioAtualizacao.textContent = ultima.horario;
         atualizarNivel();
         atualizarHistorico();
         atualizarGrafico();
+    } catch (erro) {
+        document.getElementById("mensagemConfirmacao").textContent = "Histórico local indisponível; exibindo dados de demonstração.";
     }
 }
 
 carregarMedicoes();
 
-botaoRegistrar.addEventListener("click", salvarMedicoes);
+nivelManual.addEventListener("keydown", evento => {
+    if (evento.key === "Enter") botaoRegistrar.click();
+});
 
-botaoAtualizar.addEventListener("click", salvarMedicoes);
+botaoAtualizar.addEventListener("click", () => {
+    document.getElementById("mensagemConfirmacao").textContent = "Medição simulada registrada.";
+    salvarMedicoes();
+});
 
 // EXPORTAÇÃO DO HISTÓRICO
 
