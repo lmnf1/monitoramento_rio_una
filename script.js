@@ -479,3 +479,33 @@ carregarMedicoes();
 botaoRegistrar.addEventListener("click", salvarMedicoes);
 
 botaoAtualizar.addEventListener("click", salvarMedicoes);
+
+// EXPORTAÇÃO DO HISTÓRICO
+
+document.getElementById("botaoExportar")
+    .addEventListener("click", function() {
+
+        let csv = "Horario;Nivel (m)\n";
+
+        medicoes.forEach(function(medicao) {
+            csv += `${medicao.horario};${medicao.nivel.toFixed(1).replace(".", ",")}\n`;
+        });
+
+        const arquivo = new Blob(
+            ["\uFEFF" + csv],
+            { type: "text/csv;charset=utf-8;" }
+        );
+
+        const url = URL.createObjectURL(arquivo);
+
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "medicoes_rio_una.csv";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
