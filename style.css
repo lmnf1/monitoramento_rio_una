@@ -699,3 +699,88 @@ body.dark footer strong {
         font-size: 27px;
     }
 }
+
+/* MELHORIAS DA VERSÃO FINAL */
+
+.registro-medicao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 24px 0;
+    padding: 20px;
+    border: 1px solid #64748b;
+    border-radius: 12px;
+}
+
+.registro-medicao label {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#nivelManual {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    border: 1px solid #94a3b8;
+    border-radius: 8px;
+    font-size: 16px;
+    background: transparent;
+    color: inherit;
+}
+
+#botaoRegistrar,
+#botaoExportar {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#botaoRegistrar {
+    background: #047857;
+    color: white;
+}
+
+#botaoExportar {
+    background: #2563eb;
+    color: white;
+    margin-top: 12px;
+}
+
+#botaoRegistrar:hover,
+#botaoExportar:hover {
+    filter: brightness(0.9);
+}
+
+.mensagem-confirmacao {
+    margin-top: 15px;
+    color: #047857;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.dark .mensagem-confirmacao {
+    color: #6ee7b7;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #60a5fa;
+    outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+    .registro-medicao {
+        padding: 15px;
+    }
+
+    #botaoRegistrar,
+    #botaoExportar,
+    #botaoAtualizar {
+        width: 100%;
+    }
+}
