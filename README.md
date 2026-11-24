@@ -46,7 +46,7 @@ As contribuições devem seguir estas regras:
 * Corrigir possíveis conflitos antes da integração;
 * Manter o código e a documentação organizados.
 
-##  Política de ramificação
+## Política de ramificação
 
 O projeto utiliza branches para organizar o desenvolvimento e evitar alterações diretamente na versão principal.
 
@@ -69,4 +69,17 @@ As funcionalidades são desenvolvidas em branches separadas e integradas
 
 ### Histórico de versões
 
-- v1.0.0 — Primeira versão estável do sistema de monitoramento do Rio Una.
+* v1.0.0 — Primeira versão estável do sistema de monitoramento do Rio Una.
+
+
+
+Justificativa do projeto
+
+
+
+O desenvolvimento deste sistema se justifica pela importância do monitoramento do Rio Una em Palmares, Pernambuco. A elevação do nível da água pode representar riscos para as áreas próximas ao rio, especialmente durante períodos de chuvas intensas.
+
+
+
+O projeto busca demonstrar como a tecnologia pode contribuir para a conscientização ambiental e para a compreensão da importância do acompanhamento do nível dos rios. O sistema possui finalidade educativa e utiliza dados simulados, não substituindo medições reais ou alertas oficiais.
+
