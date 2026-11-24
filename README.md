@@ -8,12 +8,21 @@ O sistema utiliza dados simulados para apresentar o nível da água e classifica
 
 A proposta busca contribuir para o acompanhamento das condições do Rio Una e, ao mesmo tempo, demonstrar a utilização de ferramentas de **Git e GitHub**, com organização de commits, branches, Pull Requests, revisões e releases.
 
-**Objetivos:**
+## Objetivos do projeto
 
-* Acompanhar, de forma simulada, o nível do Rio Una e informar a situação atual.
-* Servir de projeto educacional para praticar Git e GitHub, com branches, commits claros, Pull Requests, revisões e release.
+### Objetivo geral
 
-> **Protótipo educacional.** Este sistema ainda **não possui integração com sensores reais do Rio Una**. Os valores são simulados ou registrados manualmente, **não** representam medição oficial e **não** devem ser usados como orientação de risco ou de evacuação.
+Desenvolver um sistema educativo de monitoramento simulado do Rio Una, em Palmares.
+
+### Objetivos específicos
+
+- Apresentar o nível atual da água.
+- Classificar a situação do rio em normal, atenção ou alerta.
+- Registrar e consultar o histórico das medições.
+- Apresentar gráficos e avisos.
+- Permitir a exportação dos dados em CSV.
+- Aplicar boas práticas de versionamento com Git e GitHub.
+
 
 ##  Problema local
 
@@ -68,6 +77,10 @@ Não é preciso instalar nada. Você só precisa de um navegador moderno (Chrome
 3. Abra o arquivo `index.html` no navegador (clique duas vezes nele).
 4. Registre medições e acompanhe o nível, a situação, o histórico e o gráfico.
 5. Use a opção de exportação para baixar os dados em CSV.
+
+### Acesso online
+
+[Acessar o sistema de Monitoramento do Rio Una](https://lmnf1.github.io/monitoramento_rio_una/)
 
 ## Evolução das versões
 
