@@ -784,3 +784,12 @@ input:focus-visible {
         width: 100%;
     }
 }
+/* Organização dos controles */
+.atualizacao { display: grid; grid-template-columns: minmax(110px, 1fr) minmax(180px, 2fr) minmax(140px, 1fr) minmax(140px, 1fr); align-items: center; }
+.registro-medicao { margin: 0; padding: 12px; }
+#botaoExportar { margin-top: 0; }
+#botaoAtualizar { width: 100%; }
+.mensagem-confirmacao { grid-column: 1 / -1; margin: 0; }
+.mensagem-confirmacao:empty { display: none; }
+@media (max-width: 1000px) { .atualizacao { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .atualizacao { grid-template-columns: 1fr; } #grafico { height: 240px; } }
