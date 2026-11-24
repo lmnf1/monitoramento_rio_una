@@ -72,7 +72,7 @@
 
             <div class="status-online">
                 <span></span>
-                Sistema ativo
+                Protótipo acadêmico
             </div>
 
         </section>
@@ -376,11 +376,26 @@
                 </strong>
 
             </div>
+            <div class="registro-medicao">
+            <label for="nivelManual">Nível do rio (m)</label>
 
+            <input type="number"
+                id="nivelManual"
+                placeholder="Ex.: 2.8"
+                min="0"
+                step="0.1">
+
+            <button id="botaoRegistrar">
+                Registrar medição
+            </button>
+        </div>
 
             <button id="botaoAtualizar">
-                Atualizar monitoramento
+                Simular medição
             </button>
+
+                <button id="botaoExportar">Exportar histórico</button>
+            <p id="mensagemConfirmacao" class="mensagem-confirmacao" role="status" aria-live="polite"></p>
 
         </section>
 
@@ -399,9 +414,7 @@
                 </strong>
 
                 <p>
-                    Este sistema utiliza dados simulados para fins
-                    acadêmicos e demonstração do funcionamento
-                    do monitoramento.
+                    Protótipo acadêmico com dados simulados ou inseridos manualmente. Não recebe dados de sensores reais. Os limites de alerta são ilustrativos e não devem orientar decisões de segurança.
                 </p>
 
             </div>

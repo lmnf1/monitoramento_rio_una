@@ -155,8 +155,14 @@ function atualizarGrafico() {
     const topo = 40;
     const base = 250;
 
-    const nivelMinimo = 1.5;
-    const nivelMaximo = 3.5;
+    const valores = medicoes.map(m => m.nivel);
+
+    const nivelMinimo = Math.min(1.5, ...valores);
+    const nivelMaximo = Math.max(3.5, ...valores);
+    document.querySelectorAll("#grafico .texto-eixo").forEach((rotulo, i) => {
+        const valor = nivelMaximo - i * (nivelMaximo - nivelMinimo) / 3;
+        rotulo.textContent = valor.toLocaleString("pt-BR", {maximumFractionDigits: 2}) + " m";
+    });
 
     let pontos = [];
 
@@ -388,3 +394,127 @@ atualizarNivel();
 atualizarHistorico();
 
 atualizarGrafico();
+
+// REGISTRO MANUAL DE MEDIÇÕES
+
+const nivelManual =
+    document.getElementById("nivelManual");
+
+const botaoRegistrar =
+    document.getElementById("botaoRegistrar");
+
+botaoRegistrar.addEventListener("click", function() {
+
+    const valor = Number(nivelManual.value);
+
+    if (
+        nivelManual.value.trim() === "" ||
+        !Number.isFinite(valor) ||
+        valor < 0
+    ) {
+        document.getElementById("mensagemConfirmacao").textContent = "Informe um nível válido, maior ou igual a zero.";
+        nivelManual.focus();
+        return;
+    }
+
+    nivelAtual = Number(valor.toFixed(1));
+
+    const horario = new Date().toLocaleTimeString(
+        "pt-BR",
+        { hour: "2-digit", minute: "2-digit" }
+    );
+
+    medicoes.push({
+        horario: horario,
+        nivel: nivelAtual
+    });
+
+    if (medicoes.length > 6) {
+        medicoes.shift();
+    }
+
+    atualizarNivel();
+    atualizarHistorico();
+    atualizarGrafico();
+
+    horarioAtualizacao.textContent = horario;
+
+    const mensagem =
+        document.getElementById("mensagemConfirmacao");
+
+    if (mensagem) {
+        mensagem.textContent =
+            "Medição registrada com sucesso!";
+    } else {
+        alert("Medição registrada com sucesso!");
+    }
+
+    nivelManual.value = "";
+    salvarMedicoes();
+});
+// ARMAZENAMENTO LOCAL DAS MEDIÇÕES
+
+function salvarMedicoes() {
+    try {
+        localStorage.setItem("medicoesRioUna", JSON.stringify(medicoes));
+    } catch (erro) {
+        document.getElementById("mensagemConfirmacao").textContent = "Não foi possível salvar o histórico no navegador.";
+    }
+}
+
+function carregarMedicoes() {
+    try {
+        const dados = JSON.parse(localStorage.getItem("medicoesRioUna"));
+        if (!Array.isArray(dados) || !dados.length || !dados.every(m => m && typeof m.horario === "string" && /^\d{2}:\d{2}$/.test(m.horario) && Number.isFinite(m.nivel) && m.nivel >= 0)) return;
+        medicoes = dados.slice(-6);
+        const ultima = medicoes[medicoes.length - 1];
+        nivelAtual = ultima.nivel;
+        horarioAtualizacao.textContent = ultima.horario;
+        atualizarNivel();
+        atualizarHistorico();
+        atualizarGrafico();
+    } catch (erro) {
+        document.getElementById("mensagemConfirmacao").textContent = "Histórico local indisponível; exibindo dados de demonstração.";
+    }
+}
+
+carregarMedicoes();
+
+nivelManual.addEventListener("keydown", evento => {
+    if (evento.key === "Enter") botaoRegistrar.click();
+});
+
+botaoAtualizar.addEventListener("click", () => {
+    document.getElementById("mensagemConfirmacao").textContent = "Medição simulada registrada.";
+    salvarMedicoes();
+});
+
+// EXPORTAÇÃO DO HISTÓRICO
+
+document.getElementById("botaoExportar")
+    .addEventListener("click", function() {
+
+        let csv = "Horario;Nivel (m)\n";
+
+        medicoes.forEach(function(medicao) {
+            csv += `${medicao.horario};${medicao.nivel.toFixed(1).replace(".", ",")}\n`;
+        });
+
+        const arquivo = new Blob(
+            ["\uFEFF" + csv],
+            { type: "text/csv;charset=utf-8;" }
+        );
+
+        const url = URL.createObjectURL(arquivo);
+
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "medicoes_rio_una.csv";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
