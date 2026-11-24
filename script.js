@@ -444,3 +444,36 @@ botaoRegistrar.addEventListener("click", function() {
 
     nivelManual.value = "";
 });
+// ARMAZENAMENTO LOCAL DAS MEDIÇÕES
+
+function salvarMedicoes() {
+    localStorage.setItem(
+        "medicoesRioUna",
+        JSON.stringify(medicoes)
+    );
+}
+
+function carregarMedicoes() {
+    const dados = localStorage.getItem("medicoesRioUna");
+
+    if (dados) {
+        medicoes = JSON.parse(dados);
+
+        if (medicoes.length > 0) {
+            const ultima = medicoes[medicoes.length - 1];
+
+            nivelAtual = ultima.nivel;
+            horarioAtualizacao.textContent = ultima.horario;
+        }
+
+        atualizarNivel();
+        atualizarHistorico();
+        atualizarGrafico();
+    }
+}
+
+carregarMedicoes();
+
+botaoRegistrar.addEventListener("click", salvarMedicoes);
+
+botaoAtualizar.addEventListener("click", salvarMedicoes);
