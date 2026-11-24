@@ -388,3 +388,59 @@ atualizarNivel();
 atualizarHistorico();
 
 atualizarGrafico();
+
+// REGISTRO MANUAL DE MEDIÇÕES
+
+const nivelManual =
+    document.getElementById("nivelManual");
+
+const botaoRegistrar =
+    document.getElementById("botaoRegistrar");
+
+botaoRegistrar.addEventListener("click", function() {
+
+    const valor = Number(nivelManual.value);
+
+    if (
+        nivelManual.value.trim() === "" ||
+        !Number.isFinite(valor) ||
+        valor < 0
+    ) {
+        alert("Informe um nível válido.");
+        return;
+    }
+
+    nivelAtual = valor;
+
+    const horario = new Date().toLocaleTimeString(
+        "pt-BR",
+        { hour: "2-digit", minute: "2-digit" }
+    );
+
+    medicoes.push({
+        horario: horario,
+        nivel: nivelAtual
+    });
+
+    if (medicoes.length > 6) {
+        medicoes.shift();
+    }
+
+    atualizarNivel();
+    atualizarHistorico();
+    atualizarGrafico();
+
+    horarioAtualizacao.textContent = horario;
+
+    const mensagem =
+        document.getElementById("mensagemConfirmacao");
+
+    if (mensagem) {
+        mensagem.textContent =
+            "Medição registrada com sucesso!";
+    } else {
+        alert("Medição registrada com sucesso!");
+    }
+
+    nivelManual.value = "";
+});
