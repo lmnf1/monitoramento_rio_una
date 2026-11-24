@@ -155,8 +155,10 @@ function atualizarGrafico() {
     const topo = 40;
     const base = 250;
 
-    const nivelMinimo = 1.5;
-    const nivelMaximo = 3.5;
+    const valores = medicoes.map(m => m.nivel);
+
+    const nivelMinimo = Math.min(1.5, ...valores);
+    const nivelMaximo = Math.max(3.5, ...valores);
 
     let pontos = [];
 
