@@ -127,7 +127,7 @@ O projeto possibilita praticar:
 |------------|----------------------------|---------------------------------------------------------------------------------------------------------|
 | Lívia      | Desenvolvimento do sistema | Implementa as funcionalidades, testa o fluxo principal e registra como executar o programa.             |
 | Isabel     | README e documentação      | Explica o problema local, as funcionalidades, as tecnologias, a execução, as versões e o versionamento. |
-| Isabella   | Organização e apresentação | Organiza o trabalho do grupo e cuida da apresentação final.                                             |
+| Isabella   | Organização e apresentação | Organiza o trabalho do grupo e cuidar da apresentação final.                                             |
 O projeto utiliza o Git para registrar as alterações e o GitHub para hospedar o repositório e facilitar o trabalho em equipe.
 
 ## Projeto de inspiração
